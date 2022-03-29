@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\sendMailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('forget-password', [sendMailController::class, 'getFormReset']);
+Route::post('forget-password', [sendMailController::class, 'postFormReset'])->name('post.forget.password');
+
+Route::get('get-password/{user}/{token}', [sendMailController::class, 'getPassword']);
+Route::get('get-password/{user}/{token}', [sendMailController::class, 'resetPassword'])->name('post.reset.password');
